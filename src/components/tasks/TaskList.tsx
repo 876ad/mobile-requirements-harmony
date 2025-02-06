@@ -16,7 +16,7 @@ export const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskGroups, setTaskGroups] = useState<TaskGroup[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [selectedGroupId, setSelectedGroupId] = useState<string>("");
+  const [selectedGroupId, setSelectedGroupId] = useState<string>("NO_GROUP");
   const [newGroupName, setNewGroupName] = useState("");
   const [showNewGroupInput, setShowNewGroupInput] = useState(false);
 
@@ -30,7 +30,7 @@ export const TaskList = () => {
       title: newTaskTitle,
       completed: false,
       dueDate: new Date(),
-      groupId: selectedGroupId || undefined,
+      groupId: selectedGroupId === "NO_GROUP" ? undefined : selectedGroupId,
     };
     
     setTasks([...tasks, newTask]);
@@ -92,7 +92,7 @@ export const TaskList = () => {
                 <SelectValue placeholder="Select group" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">No group</SelectItem>
+                <SelectItem value="NO_GROUP">No group</SelectItem>
                 {taskGroups.map(group => (
                   <SelectItem key={group.id} value={group.id}>
                     {group.name}
