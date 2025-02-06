@@ -3,6 +3,7 @@ import { HealthDataCarousel } from "@/components/home/HealthDataCarousel";
 import { DateNavigation } from "@/components/home/DateNavigation";
 import { ProgressTracker } from "@/components/home/ProgressTracker";
 import { TabNavigation } from "@/components/home/TabNavigation";
+import { TaskList } from "@/components/tasks/TaskList";
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -28,12 +29,15 @@ const Index = () => {
         onTabChange={setActiveTab}
       />
       
-      {/* Content area will be implemented in the next iteration */}
-      <div className="flex-1 rounded-lg border border-border p-4">
-        <p className="text-muted-foreground">
-          {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} content will be displayed here
-        </p>
-      </div>
+      {activeTab === 'tasks' && <TaskList />}
+      
+      {(activeTab === 'goals' || activeTab === 'projects') && (
+        <div className="flex-1 rounded-lg border border-border p-4">
+          <p className="text-muted-foreground">
+            {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} content will be displayed here
+          </p>
+        </div>
+      )}
     </div>
   );
 };
